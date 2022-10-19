@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{home.index.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1 th:text="#{home.index.headline}" class="grow text-3xl md:text-4xl font-medium mb-8" />
+            <p th:utext="#{home.index.text}" class="mb-12" />
+            <div class="md:w-2/5 mb-12">
+                <h4 th:text="#{home.index.exploreEntities}" class="text-2xl font-medium mb-4" />
+                <div class="flex flex-col border border-gray-300 rounded">
+                    <a th:href="@{/events}" th:text="#{event.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b rounded-t px-4 py-2" />
+                    <a th:href="@{/venues}" th:text="#{venue.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/students}" th:text="#{student.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/verticals}" th:text="#{vertical.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/sCSMemberss}" th:text="#{sCSMembers.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/counselors}" th:text="#{counselor.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/facultys}" th:text="#{faculty.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/inititativess}" th:text="#{inititatives.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/guestsSpeakerss}" th:text="#{guestsSpeakers.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/honorariums}" th:text="#{honorarium.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/recruitments}" th:text="#{recruitment.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/applications}" th:text="#{application.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/eventsPermissions}" th:text="#{eventsPermission.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/initiativesPermissions}" th:text="#{initiativesPermission.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/yearlyBudgetss}" th:text="#{yearlyBudgets.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/inductionPrograms}" th:text="#{inductionProgram.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/counsellingSessionss}" th:text="#{counsellingSessions.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/awards}" th:text="#{award.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/inductionmentors}" th:text="#{inductionmentor.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/vendorss}" th:text="#{vendors.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/teammeetingss}" th:text="#{teammeetings.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/bookss}" th:text="#{books.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/bookBookingss}" th:text="#{bookBookings.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/monthlyReportss}" th:text="#{monthlyReports.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/alumniAdvisorss}" th:text="#{alumniAdvisors.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/billss}" th:text="#{bills.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/repositoriess}" th:text="#{repositories.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 border-b px-4 py-2" />
+                    <a th:href="@{/iMGroupss}" th:text="#{iMGroups.list.headline}" class="w-full border-gray-300 hover:bg-gray-100 rounded-b px-4 py-2" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

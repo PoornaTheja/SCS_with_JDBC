@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{inititatives.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{inititatives.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/inititativess/add}" th:text="#{inititatives.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${inititativess.empty}" th:text="#{inititatives.list.empty}" />
+            <div th:if="${!inititativess.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{inititatives.initiativesId.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.title.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.startDate.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.timings.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.noOfAttendees.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.resources.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.minutesOfMeeting.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{inititatives.permissionforinitiative.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="inititatives : ${inititativess}" class="odd:bg-gray-100">
+                            <td th:text="${inititatives.initiativesId}" class="p-2" />
+                            <td th:text="${inititatives.title}" class="p-2" />
+                            <td th:text="${inititatives.startDate}" class="p-2" />
+                            <td th:text="${inititatives.timings}" class="p-2" />
+                            <td th:text="${inititatives.noOfAttendees}" class="p-2" />
+                            <td th:text="${inititatives.resources}" class="p-2" />
+                            <td th:text="${inititatives.minutesOfMeeting}" class="p-2" />
+                            <td th:text="${inititatives.permissionforinitiative}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/inititativess/delete/{initiativesId}(initiativesId=${inititatives.initiativesId})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/inititativess/edit/{initiativesId}(initiativesId=${inititatives.initiativesId})}" th:text="#{inititatives.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{inititatives.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{guestsSpeakers.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{guestsSpeakers.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/guestsSpeakerss/add}" th:text="#{guestsSpeakers.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${guestsSpeakerss.empty}" th:text="#{guestsSpeakers.list.empty}" />
+            <div th:if="${!guestsSpeakerss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{guestsSpeakers.guestID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.name.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.designation.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.accountNumber.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.resources.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.emailID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.phoneNumber.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{guestsSpeakers.qualification.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="guestsSpeakers : ${guestsSpeakerss}" class="odd:bg-gray-100">
+                            <td th:text="${guestsSpeakers.guestID}" class="p-2" />
+                            <td th:text="${guestsSpeakers.name}" class="p-2" />
+                            <td th:text="${guestsSpeakers.designation}" class="p-2" />
+                            <td th:text="${guestsSpeakers.accountNumber}" class="p-2" />
+                            <td th:text="${guestsSpeakers.resources}" class="p-2" />
+                            <td th:text="${guestsSpeakers.emailID}" class="p-2" />
+                            <td th:text="${guestsSpeakers.phoneNumber}" class="p-2" />
+                            <td th:text="${guestsSpeakers.qualification}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/guestsSpeakerss/delete/{guestID}(guestID=${guestsSpeakers.guestID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/guestsSpeakerss/edit/{guestID}(guestID=${guestsSpeakers.guestID})}" th:text="#{guestsSpeakers.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{guestsSpeakers.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

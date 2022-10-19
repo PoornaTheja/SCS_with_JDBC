@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{bookBookings.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{bookBookings.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/bookBookingss/add}" th:text="#{bookBookings.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${bookBookingss.empty}" th:text="#{bookBookings.list.empty}" />
+            <div th:if="${!bookBookingss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{bookBookings.bookingid.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.dateTaken.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.expectedReturn.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.returnDate.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.personalRating.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.status.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.studorderbooking.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{bookBookings.bookingForBook.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="bookBookings : ${bookBookingss}" class="odd:bg-gray-100">
+                            <td th:text="${bookBookings.bookingid}" class="p-2" />
+                            <td th:text="${bookBookings.dateTaken}" class="p-2" />
+                            <td th:text="${bookBookings.expectedReturn}" class="p-2" />
+                            <td th:text="${bookBookings.returnDate}" class="p-2" />
+                            <td th:text="${bookBookings.personalRating}" class="p-2" />
+                            <td th:text="${bookBookings.status}" class="p-2" />
+                            <td th:text="${bookBookings.studorderbooking}" class="p-2" />
+                            <td th:text="${bookBookings.bookingForBook}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/bookBookingss/delete/{bookingid}(bookingid=${bookBookings.bookingid})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/bookBookingss/edit/{bookingid}(bookingid=${bookBookings.bookingid})}" th:text="#{bookBookings.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{bookBookings.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

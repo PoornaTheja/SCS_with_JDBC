@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{application.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{application.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/applications/add}" th:text="#{application.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${applications.empty}" th:text="#{application.list.empty}" />
+            <div th:if="${!applications.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{application.applicationID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.isSelected.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.dateofapplication.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.applicationstovertical.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.applicnforrecruitment.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.applicantbecomesmember.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.studapplies.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{application.applicnpartofvertical.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="application : ${applications}" class="odd:bg-gray-100">
+                            <td th:text="${application.applicationID}" class="p-2" />
+                            <td th:text="${application.isSelected}" class="p-2" />
+                            <td th:text="${application.dateofapplication}" class="p-2" />
+                            <td th:text="${application.applicationstovertical}" class="p-2" />
+                            <td th:text="${application.applicnforrecruitment}" class="p-2" />
+                            <td th:text="${application.applicantbecomesmember}" class="p-2" />
+                            <td th:text="${application.studapplies}" class="p-2" />
+                            <td th:text="${application.applicnpartofvertical}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/applications/delete/{applicationID}(applicationID=${application.applicationID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/applications/edit/{applicationID}(applicationID=${application.applicationID})}" th:text="#{application.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{application.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

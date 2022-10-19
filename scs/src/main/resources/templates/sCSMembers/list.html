@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{sCSMembers.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{sCSMembers.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/sCSMemberss/add}" th:text="#{sCSMembers.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${sCSMemberss.empty}" th:text="#{sCSMembers.list.empty}" />
+            <div th:if="${!sCSMemberss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{sCSMembers.memberId.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.fromDate.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.toDate.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.currentPosition.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.verticalmemberbelongs.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.membersresponsblebills.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.membersattendmeets.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{sCSMembers.memberbecomesIM.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="sCSMembers : ${sCSMemberss}" class="odd:bg-gray-100">
+                            <td th:text="${sCSMembers.memberId}" class="p-2" />
+                            <td th:text="${sCSMembers.fromDate}" class="p-2" />
+                            <td th:text="${sCSMembers.toDate}" class="p-2" />
+                            <td th:text="${sCSMembers.currentPosition}" class="p-2" />
+                            <td th:text="${sCSMembers.verticalmemberbelongs}" class="p-2" />
+                            <td th:text="${sCSMembers.membersresponsblebills}" class="p-2" />
+                            <td th:text="${sCSMembers.membersattendmeets}" class="p-2" />
+                            <td th:text="${sCSMembers.memberbecomesIM}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/sCSMemberss/delete/{memberId}(memberId=${sCSMembers.memberId})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/sCSMemberss/edit/{memberId}(memberId=${sCSMembers.memberId})}" th:text="#{sCSMembers.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{sCSMembers.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

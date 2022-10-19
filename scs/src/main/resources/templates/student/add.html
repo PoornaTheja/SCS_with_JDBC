@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{student.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{student.add.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/students}" th:text="#{student.add.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="fragments/forms::globalErrors('student')" />
+            <form th:action="${#httpServletRequest.requestURI}" method="post">
+                <div th:replace="fragments/forms::inputRow(object='student', field='name')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='yearOfjoin')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='department')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='yearOfGradn')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='program')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='dateOfBirth')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='phoneNumber')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='eMailId')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='studentPassedOut', type='select')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='sCSMembership', type='select')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='studparticipateevents', type='multiselect')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='studentawardeds', type='multiselect')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='studinitiativeparts', type='multiselect')" />
+                <div th:replace="fragments/forms::inputRow(object='student', field='studspartofIMgp', type='select')" />
+                <input type="submit" th:value="#{student.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

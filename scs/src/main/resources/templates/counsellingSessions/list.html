@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{counsellingSessions.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{counsellingSessions.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/counsellingSessionss/add}" th:text="#{counsellingSessions.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${counsellingSessionss.empty}" th:text="#{counsellingSessions.list.empty}" />
+            <div th:if="${!counsellingSessionss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{counsellingSessions.sessionID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.feedback.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.toTime.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.fromTime.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.date.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.counseledBy.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{counsellingSessions.counselsTo.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="counsellingSessions : ${counsellingSessionss}" class="odd:bg-gray-100">
+                            <td th:text="${counsellingSessions.sessionID}" class="p-2" />
+                            <td th:text="${counsellingSessions.feedback}" class="p-2" />
+                            <td th:text="${counsellingSessions.toTime}" class="p-2" />
+                            <td th:text="${counsellingSessions.fromTime}" class="p-2" />
+                            <td th:text="${counsellingSessions.date}" class="p-2" />
+                            <td th:text="${counsellingSessions.counseledBy}" class="p-2" />
+                            <td th:text="${counsellingSessions.counselsTo}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/counsellingSessionss/delete/{sessionID}(sessionID=${counsellingSessions.sessionID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/counsellingSessionss/edit/{sessionID}(sessionID=${counsellingSessions.sessionID})}" th:text="#{counsellingSessions.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{counsellingSessions.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

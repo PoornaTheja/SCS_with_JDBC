@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{student.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{student.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/students/add}" th:text="#{student.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${students.empty}" th:text="#{student.list.empty}" />
+            <div th:if="${!students.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{student.studentRollNo.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.name.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.yearOfjoin.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.department.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.yearOfGradn.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.program.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.dateOfBirth.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{student.phoneNumber.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="student : ${students}" class="odd:bg-gray-100">
+                            <td th:text="${student.studentRollNo}" class="p-2" />
+                            <td th:text="${student.name}" class="p-2" />
+                            <td th:text="${student.yearOfjoin}" class="p-2" />
+                            <td th:text="${student.department}" class="p-2" />
+                            <td th:text="${student.yearOfGradn}" class="p-2" />
+                            <td th:text="${student.program}" class="p-2" />
+                            <td th:text="${student.dateOfBirth}" class="p-2" />
+                            <td th:text="${student.phoneNumber}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/students/delete/{studentRollNo}(studentRollNo=${student.studentRollNo})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/students/edit/{studentRollNo}(studentRollNo=${student.studentRollNo})}" th:text="#{student.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{student.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

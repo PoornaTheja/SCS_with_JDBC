@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{teammeetings.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{teammeetings.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/teammeetingss/add}" th:text="#{teammeetings.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${teammeetingss.empty}" th:text="#{teammeetings.list.empty}" />
+            <div th:if="${!teammeetingss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{teammeetings.meetingID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.noOfAttendees.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.kindOfMeeting.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.date.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.fromTime.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.toTime.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.location.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{teammeetings.resourcesLink.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="teammeetings : ${teammeetingss}" class="odd:bg-gray-100">
+                            <td th:text="${teammeetings.meetingID}" class="p-2" />
+                            <td th:text="${teammeetings.noOfAttendees}" class="p-2" />
+                            <td th:text="${teammeetings.kindOfMeeting}" class="p-2" />
+                            <td th:text="${teammeetings.date}" class="p-2" />
+                            <td th:text="${teammeetings.fromTime}" class="p-2" />
+                            <td th:text="${teammeetings.toTime}" class="p-2" />
+                            <td th:text="${teammeetings.location}" class="p-2" />
+                            <td th:text="${teammeetings.resourcesLink}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/teammeetingss/delete/{meetingID}(meetingID=${teammeetings.meetingID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/teammeetingss/edit/{meetingID}(meetingID=${teammeetings.meetingID})}" th:text="#{teammeetings.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{teammeetings.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

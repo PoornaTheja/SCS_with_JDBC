@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{vertical.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{vertical.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/verticals/add}" th:text="#{vertical.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${verticals.empty}" th:text="#{vertical.list.empty}" />
+            <div th:if="${!verticals.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{vertical.verticalID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vertical.nameOfVertical.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vertical.verticalBudgets.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="vertical : ${verticals}" class="odd:bg-gray-100">
+                            <td th:text="${vertical.verticalID}" class="p-2" />
+                            <td th:text="${vertical.nameOfVertical}" class="p-2" />
+                            <td th:text="${vertical.verticalBudgets}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/verticals/delete/{verticalID}(verticalID=${vertical.verticalID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/verticals/edit/{verticalID}(verticalID=${vertical.verticalID})}" th:text="#{vertical.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{vertical.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

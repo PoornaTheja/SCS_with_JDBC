@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{honorarium.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{honorarium.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/honorariums/add}" th:text="#{honorarium.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${honorariums.empty}" th:text="#{honorarium.list.empty}" />
+            <div th:if="${!honorariums.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{honorarium.honorariumID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.guestFeedback.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.amount.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.status.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.transactionNumber.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.honoredFor.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.honoredToGuests.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{honorarium.honorarirumResponsibles.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="honorarium : ${honorariums}" class="odd:bg-gray-100">
+                            <td th:text="${honorarium.honorariumID}" class="p-2" />
+                            <td th:text="${honorarium.guestFeedback}" class="p-2" />
+                            <td th:text="${honorarium.amount}" class="p-2" />
+                            <td th:text="${honorarium.status}" class="p-2" />
+                            <td th:text="${honorarium.transactionNumber}" class="p-2" />
+                            <td th:text="${honorarium.honoredFor}" class="p-2" />
+                            <td th:text="${honorarium.honoredToGuests}" class="p-2" />
+                            <td th:text="${honorarium.honorarirumResponsibles}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/honorariums/delete/{honorariumID}(honorariumID=${honorarium.honorariumID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/honorariums/edit/{honorariumID}(honorariumID=${honorarium.honorariumID})}" th:text="#{honorarium.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{honorarium.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

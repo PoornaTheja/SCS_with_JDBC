@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{vendors.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{vendors.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/vendorss/add}" th:text="#{vendors.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${vendorss.empty}" th:text="#{vendors.list.empty}" />
+            <div th:if="${!vendorss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{vendors.vendorID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vendors.vendorName.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vendors.address.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vendors.contactNo.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{vendors.item.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="vendors : ${vendorss}" class="odd:bg-gray-100">
+                            <td th:text="${vendors.vendorID}" class="p-2" />
+                            <td th:text="${vendors.vendorName}" class="p-2" />
+                            <td th:text="${vendors.address}" class="p-2" />
+                            <td th:text="${vendors.contactNo}" class="p-2" />
+                            <td th:text="${vendors.item}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/vendorss/delete/{vendorID}(vendorID=${vendors.vendorID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/vendorss/edit/{vendorID}(vendorID=${vendors.vendorID})}" th:text="#{vendors.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{vendors.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

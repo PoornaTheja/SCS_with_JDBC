@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{teammeetings.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{teammeetings.add.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/teammeetingss}" th:text="#{teammeetings.add.back}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:replace="fragments/forms::globalErrors('teammeetings')" />
+            <form th:action="${#httpServletRequest.requestURI}" method="post">
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='noOfAttendees')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='kindOfMeeting')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='date')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='fromTime')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='toTime')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='location')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='resourcesLink')" />
+                <div th:replace="fragments/forms::inputRow(object='teammeetings', field='meetbelongtovertical', type='select')" />
+                <input type="submit" th:value="#{teammeetings.add.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

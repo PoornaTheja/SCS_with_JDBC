@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{books.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 th:text="#{books.list.headline}" class="grow text-3xl md:text-4xl font-medium mb-2" />
+                <div>
+                    <a th:href="@{/bookss/add}" th:text="#{books.list.createNew}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2" />
+                </div>
+            </div>
+            <div th:if="${bookss.empty}" th:text="#{books.list.empty}" />
+            <div th:if="${!bookss.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th th:text="#{books.bookID.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.bookName.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.author.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.totalNoOfCopies.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.availableCopies.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.status.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.totalReads.label}" scope="col" class="text-left p-2" />
+                            <th th:text="#{books.bookRating.label}" scope="col" class="text-left p-2" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="books : ${bookss}" class="odd:bg-gray-100">
+                            <td th:text="${books.bookID}" class="p-2" />
+                            <td th:text="${books.bookName}" class="p-2" />
+                            <td th:text="${books.author}" class="p-2" />
+                            <td th:text="${books.totalNoOfCopies}" class="p-2" />
+                            <td th:text="${books.availableCopies}" class="p-2" />
+                            <td th:text="${books.status}" class="p-2" />
+                            <td th:text="${books.totalReads}" class="p-2" />
+                            <td th:text="${books.bookRating}" class="p-2" />
+                            <td class="p-2">
+                                <form th:action="@{/bookss/delete/{bookID}(bookID=${books.bookID})}" th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm float-right">
+                                    <a th:href="@{/bookss/edit/{bookID}(bookID=${books.bookID})}" th:text="#{books.list.edit}" class="inline-block text-white bg-sky-500 hover:bg-sky-600 focus:ring-sky-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                    <button th:text="#{books.list.delete}" type="submit" class="inline-block text-white bg-red-500 hover:bg-red-600 focus:ring-red-200focus:ring-3 rounded px-2.5 py-1.5 text-sm" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
